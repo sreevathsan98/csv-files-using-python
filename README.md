@@ -1,2 +1,45 @@
 # csv-files-using-python
 Reading and writing csv files using python
+Hello guys .Through this code I have shown 
+1.How to read data from a csv file using python
+2.Process the data 
+3.Storing the processed data to another csv file
+
+
+import csv
+
+with open('Example.csv') as csvfile:
+    readcsv = csv.DictReader(csvfile)
+    data=[r for r in readcsv]
+    length=len(data[0])
+    row_count = sum(1 for line in open('Example.csv'))
+print("The Data in the given sheet is:")
+print(data)
+print("The column length is "+str(length))
+print("The number of Rows is "+str(row_count))
+name=[]
+total=[]
+average=[]
+for val in range(0,row_count-1):
+    name.append(data[val]['Name '])
+    total1 = int(data[val]['Maths'])+int(data[val]['Physics'])+int(data[val]['chemistry'])+int(data[val]['Biology'])
+    average1 = total1/4
+    total.append(total1)
+    average.append(average1)
+print(name)
+print(total)
+print(average)
+project=[]
+for val in range(0,row_count-1):
+    project1=[name[val],total[val],average[val]]
+    project.append(project1)
+print(project)
+header=[['Name','Total','Average']]
+import csv
+with open('project_result.csv','w',newline='') as myfile:
+    writer = csv.writer(myfile)
+    writer.writerows(header)
+    writer.writerows(project)
+print("writing complete")
+    
+
